@@ -1,6 +1,6 @@
-##ReactのHooksを実際にコードを書きながらインプットアウトプットしていく。
+## ReactのHooksを実際にコードを書きながらインプットアウトプットしていく。
 
-##今回学ぶhooks
+## 今回学ぶhooks
 
 1. useState
 2. useEffect
