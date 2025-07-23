@@ -1,10 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import "./App.css";
 import ApplemanContext from "./main";
 
 function App() {
   const [count, setCount] = useState(0);
   const applemanInfo = useContext(ApplemanContext);
+  const ref = useRef();
 
   const handleClick = () => {
     setCount(count + 1);
@@ -13,6 +14,11 @@ function App() {
   useEffect(() => {
     console.log("Hello Hooks");
   }, [count]);
+
+  const handleRef = () => {
+    console.log(ref.current.value);
+    console.log(ref.current.offsetHeight);
+  };
 
   return (
     <div className="App">
@@ -24,6 +30,11 @@ function App() {
       <h1>useContext</h1>
       <p>{applemanInfo.name}</p>
       <p>{applemanInfo.age}</p>
+
+      <hr />
+      <h1>useRef</h1>
+      <input type="text" ref={ref} />
+      <button onClick={handleRef}>UseRef</button>
     </div>
   );
 }
