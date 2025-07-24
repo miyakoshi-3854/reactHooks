@@ -10,6 +10,7 @@ import {
 import "./App.css";
 import ApplemanContext from "./main"; // main.jsxからコンテンツをインポート
 import SomeChild from "./SomeChild";
+import useLocalStorage from "./useLocalStorage";
 
 // useReducerを定義する
 const reducer = (state, action) => {
@@ -77,6 +78,9 @@ function App() {
     alert(`これは重い処理です。`);
   }, [counter]);
 
+  // カスタムフック
+  const [age, setAge] = useLocalStorage("age", 19);
+
   return (
     <div className="App">
       <h1>useState, useEffect</h1>
@@ -110,9 +114,13 @@ function App() {
       <hr />
       <h1>useCallBack</h1>
       <SomeChild showCount={showCount} />
+
+      <hr />
+      <h1>useCallBack</h1>
+      <p>{age}</p>
+      <button onClick={() => setAge(80)}>年齢をセット</button>
     </div>
   );
 }
 
 export default App;
-z;
