@@ -1,30 +1,16 @@
-import { useEffect, useState, useContext, useRef, useReducer } from "react"; // 関数をReactライブラリからインポート
+import { useEffect, useState, useContext, useRef } from "react";
 import "./App.css";
-import ApplemanContext from "./main"; // main.jsxからコンテンツをインポート
-
-// useReducerを定義する
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "increment":
-      return state + 1;
-    case "decrement":
-      return state - 1;
-    default:
-      return state;
-  }
-};
+import ApplemanContext from "./main";
 
 function App() {
-  const [count, setCount] = useState(0); // useStateを宣言
-  const applemanInfo = useContext(ApplemanContext); // インポートされたコンテキストの値を受け取る
-  const ref = useRef(); // useRefを宣言
-  const [state, dispatch] = useReducer(reducer, 0); // useReducerを宣言
+  const [count, setCount] = useState(0);
+  const applemanInfo = useContext(ApplemanContext);
+  const ref = useRef();
 
   const handleClick = () => {
     setCount(count + 1);
   };
 
-  // useEffectを宣言
   useEffect(() => {
     console.log("Hello Hooks");
   }, [count]);
@@ -49,12 +35,6 @@ function App() {
       <h1>useRef</h1>
       <input type="text" ref={ref} />
       <button onClick={handleRef}>UseRef</button>
-
-      <hr />
-      <h1>useReducer</h1>
-      <p>カウント：{state}</p>
-      <button onClick={() => dispatch({ type: "increment" })}>+</button>
-      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
     </div>
   );
 }
