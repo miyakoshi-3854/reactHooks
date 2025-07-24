@@ -5,9 +5,11 @@ import {
   useRef,
   useReducer,
   useMemo,
+  useCallback,
 } from "react"; // 関数をReactライブラリからインポート
 import "./App.css";
 import ApplemanContext from "./main"; // main.jsxからコンテンツをインポート
+import SomeChild from "./SomeChild";
 
 // useReducerを定義する
 const reducer = (state, action) => {
@@ -64,6 +66,17 @@ function App() {
     return count02 * count02;
   }, [count02]);
 
+  // useCallBack 関数のメモ化
+  const [counter, setCounter] = useState(0);
+
+  // const showCount = () => {
+  //   alert(`これは重い処理です。`);
+  // };
+
+  const showCount = useCallback(() => {
+    alert(`これは重い処理です。`);
+  }, [counter]);
+
   return (
     <div className="App">
       <h1>useState, useEffect</h1>
@@ -93,8 +106,13 @@ function App() {
       <div>結果{square}</div>
       <button onClick={() => setCount01(count01 + 1)}>+</button>
       <button onClick={() => setCount02(count02 + 1)}>+</button>
+
+      <hr />
+      <h1>useCallBack</h1>
+      <SomeChild showCount={showCount} />
     </div>
   );
 }
 
 export default App;
+z;
