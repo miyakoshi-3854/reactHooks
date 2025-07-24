@@ -1,4 +1,11 @@
-import { useEffect, useState, useContext, useRef, useReducer } from "react"; // 関数をReactライブラリからインポート
+import {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  useReducer,
+  useMemo,
+} from "react"; // 関数をReactライブラリからインポート
 import "./App.css";
 import ApplemanContext from "./main"; // main.jsxからコンテンツをインポート
 
@@ -23,7 +30,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, 0); // useReducerを宣言
 
   const handleClick = () => {
-    setCount(count + 1);
+    // setCount(count + 1);
   };
 
   // useEffectを宣言
@@ -35,6 +42,27 @@ function App() {
     console.log(ref.current.value);
     console.log(ref.current.offsetHeight);
   };
+
+  // useMemoに使うuseState
+  const [count01, setCount01] = useState(0);
+  const [count02, setCount02] = useState(0);
+
+  // const square = () => {
+  //   let i = 0;
+  //   while (i < 20000000000) {
+  //     i++;
+  //   }
+  //   return count02 * count02;
+  // };
+
+  // useMemoによってメモ化された関数
+  const square = useMemo(() => {
+    let i = 0;
+    while (i < 20000) {
+      i++;
+    }
+    return count02 * count02;
+  }, [count02]);
 
   return (
     <div className="App">
@@ -57,6 +85,14 @@ function App() {
       <p>カウント：{state}</p>
       <button onClick={() => dispatch({ type: "increment" })}>+</button>
       <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+
+      <hr />
+      <h1>useMemo</h1>
+      <div>カウント：１{count01}</div>
+      <div>カウント：２{count02}</div>
+      <div>結果{square}</div>
+      <button onClick={() => setCount01(count01 + 1)}>+</button>
+      <button onClick={() => setCount02(count02 + 1)}>+</button>
     </div>
   );
 }
